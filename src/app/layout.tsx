@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Suspense } from "react";
+import { Nav } from "@/components/Nav";
 import { Player } from "@/components/Player";
 import "./globals.css";
 
@@ -14,17 +16,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Music App",
-  description: "Created by Next.js framework",
+  title: "Music & Podcast ",
+  description: "Your music and podcast streaming platform",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <Suspense fallback={null}>
+          <Nav />
+        </Suspense>
         <main className="pb-32">{children}</main>
         <Player />
       </body>
